@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Grab Challenge 2017</title>
+    <link rel="stylesheet" href="./static/lib/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="./static/lib/css/dc.min.css"/>
+    <link rel="stylesheet" href="./static/lib/css/dc.css"/>
+    <link rel="stylesheet" href="./static/lib/css/leaflet.css"/>
+    <link rel="stylesheet" href="./static/lib/css/keen-dashboards.css"/>
+    <link rel="stylesheet" href="./static/lib/css/MarkerCluster.css"/>
+    <link rel="stylesheet" href="./static/lib/css/MarkerCluster.Default.css"/>
+    <link rel="stylesheet" href="./static/css/custom.css"/>
+
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic" rel="stylesheet" type="text/css">
+    
+</head>
+
+<body>  
+
+        <!-- Navigation Bar -->
+    <nav class="navbar navbar-default navbar-static-top navbar-custom" >
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand text-hide bg-size-cover" href="https://www.grab.com/ph/">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/2/25/Grab_Logo.png" alt="GrabTaxi" class="img-fluid" style="height : 100%;">
+                </a>
+            </div>
+
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav navbar-right">
+                    <li role="separator" class="divider"></li>
+                    <li>
+                        <button type="button" class="btn btn-link navbar-btn" aria-hidden="true" data-toggle="modal" data-target="#myModal">About</button>
+                    </li>
+                    <li>
+                        <button type="button" class="btn btn-link navbar-btn" aria-hidden="true" data-toggle="modal" data-target="#myModal2">Contact Us</button>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    
+    <!-- About Page Modal -->
+    <div id="myModal" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">About This Application</h4>
+            </div>
+            <div class="modal-body">
+                <p>This is our entry for The Dataseer Grab Challenge 2017. All resources used in this web application are open source libraries under Apache V.2 License or MIT License.
+                </p>
+                <p>Data pre-processing of the data was done outside the app to improve loading speed. 
+                </p>
+                <p> The Grab Logo used in this application is under public domain. Credit goes to GadgetsGuy / Wikimedia Commons / Public Domain. </p>
+                
+                <p>© 2017 Cristine Lelis and Bianca Dizon. All rights reserved.</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+      </div>
+  
+    </div>
+    
+     <!-- About Page Modal -->
+    <div id="myModal2" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Contact Us</h4>
+            </div>
+            <div class="modal-body">
+				<h3>Team Takuyakis</h3>
+                <p><h4>Bianca Denise B. Dizon</h4><br/>
+                <i>Data Engineer II</i><br/>
+                Pointwest Innovations Inc. <br/>
+                E-mail: bdbdizon@gmail.com</p>
+
+                <p><h4>Cristine Anne C. Lelis</h4><br/>
+                <i>Data Engineer II</i><br/>
+                Pointwest Innovations Inc. <br/>
+                E-mail: caclelis@gmail.com
+                </p>
+           
+                
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+      </div>
+  
+    </div>
+	
+    <header>
+    <div class="wrapper">
+        <div class="jumbotron text-center">
+            <div class="container-fluid">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/2/25/Grab_Logo.png" class="img-responsive">
+                <div class = "intro">
+                    <span class="title">Data Challenge 2017</span>
+                </div>
+                <hr class = "head-primary"></hr>
+                <div class = "intro">
+                    <span class="desc">An interactive visualization of Grab's 2013 data. The graphs might take awhile to load so please be patient.</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    </header>
+    
+    <!-- "First" Row -->
+    <div class = "container-fluid cont-1">
+        <div class = "row">
+            <div class = "col-lg-6">
+                <div class="panel panel-default">
+                    <div class="panel-heading">Quick Statistics</div>
+                    <div class="panel-body">
+                
+                        <!-- First Column of First Panel -->
+                        <div class="col-lg-4">
+                            
+                            <div class = "row">
+                                <div class="chart-wrapper">
+                                    <div class="chart-title chart-center">
+                                        Count
+                                    </div>
+                                    <div id="num-count-nd" class="chart-format"></div>      
+                                </div>
+                            </div>
+                            
+                            <div class = "row">
+                                 <div class="chart-wrapper">
+                                    <div class="chart-title chart-center">
+                                        Average Fare 
+                                    </div>
+                                    <div id="num-fare-ave-chart" class="chart-format"></div>
+                                </div>
+                            </div>
+                            
+                            <hr/>
+                            
+                            <div class = "row">
+                                <div class = "alert alert-success">
+                                    <p>
+                                    &nbsp; This dashboard is interactive. You can filter through different subsets of data by clicking on any part of a chart you would like to explore.</p>
+                                </div>
+                            </div>
+                        </div> 
+                        
+                        <div class="col-lg-8">
+                            <div class = "row">
+                                <div class="chart-wrapper">
+                                    <div class="chart-title">
+                                        <h4>Number of GrabTaxi Transactions Through Time</h4>
+                                    </div>
+                                    <div class="chart-stage">
+                                        <div id="time-chart" class = "chart-adjust">
+                                        </div>
+                                    </div>
+                                    <div class="chart-notes">
+                                        <p>
+                                            Use the sparkline below to navigate within the time chart. 
+                                            <span id="nav-time-chart" class = "dc-chart"></span>
+                                        </p>
+
+                                    </div>
+                                </div>
+                            </div>
+                        
+                        </div>
+                      
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="panel panel-default">
+                    <div class="panel-heading">Anomalies?</div>
+                    <div class="panel-body">
+                        <div class = "col-lg-8">  
+                            
+                            <div class = "row">    
+                                <div class="chart-wrapper" style = "height : auto">
+                                    <div class="chart-title">
+                                        <h4>Data by Classification</h4>
+                                    </div>
+                                    <div class="chart-stage">
+                                        <div id="classification-chart">
+                                        </div>
+                                    </div>
+                                    <div class="chart-notes">
+                                        </p>Destinations that were physically impossible to reach by driving a car were classified as anomalous data. This includes destinations to a different region in the country or to another country entirely!</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class = "col-lg-4">
+                            <div class = "row">
+                                <div class = "alert alert-success">
+                                    <p>
+                                    &nbsp; A few anomalies were found while inspecting the data. Some were 
+                                    just mislabeled cities (wrong city tagged with respect to the given geocoordinates.) These were rectified. However...
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="chart-wrapper">
+                                    <div class="chart-title chart-center">
+                                    Allocation Rate
+                                    </div>
+                                    <div id="num-allocation-rate-nd" class = "chart-format"></div>
+                                                         
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="chart-wrapper">
+                                    <div class="chart-title chart-center">
+                                    Actual Allocation Rate 
+                                    </div>
+                                    <div id="num-actual-allocation-rate-nd" class = "chart-format"></div>
+                                    
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+      
+    <!-- "Second" Row -->
+    <div class = "container-fluid cont-2">
+        <div class = "col-lg-12">
+        <div class = "row">
+           <div class="col-lg-5">
+                <div id="map"></div>
+           </div>
+           <div class="col-lg-7">
+                <div class = "row">
+                <div class="col-lg-6">
+                <div class = "alert alert-success">
+                    <hr/>
+                    <p>
+                    &nbsp; The heatmap on the left
+                    lets you see where the most transactions
+                    happen. It also lets you see just how ridiculously far some of the destinations are. The other kind of heatmap chart below lets you know which hours on what days experience the most number of transactions. The chart on the right lets you filter through allocation types.
+                    </p>
+                    <hr/>
+                </div>
+                </div>
+                
+                <div class = "col-lg-6">
+                <div class="chart-wrapper">
+                        <div class= "chart-title chart-center">
+                            <h4>Allocation Type</h4>
+                        </div>
+                        <div class="chart-stage">
+                            <div id = "state-chart"></div>
+                        </div>						
+                  </div>
+                </div>
+                </div>
+                
+                <div class = "row">
+                    <div class="chart-wrapper">
+                        <div class="chart-title">
+                            <h3>Heatmap of Peak Hours per Day</h3>
+                        </div>
+                        <div class="chart-stage">
+                            <div id="dayhour-heat-chart"></div>
+                        </div>
+                    </div>
+                </div>
+           </div>
+        </div>
+        </div>
+    </div>
+    
+    <!-- "Third" Row -->
+    <div class = "container-fluid cont-1">
+        <div class = "row">
+            <div class = "col-lg-12">
+                
+                <div class = "col-lg-4">
+                    <div class = "alert alert-success">
+                    <hr/>
+                    <p>
+                    &nbsp; The two charts let you filter through the pickup location and channel where the booking was made. It lets you zone in on your target market and lets you tailor-fit promotions.
+                    </p>
+                    <hr/>
+                </div>
+                </div>
+                
+                <div class = "col-lg-4">
+                    <div class="chart-wrapper">
+                        <div class= "chart-title chart-center">
+                            <h4>Pickup Location (City)</h4>
+                        </div>
+                        <div class="chart-stage">
+                            <div id = "city-chart"></div>						
+                        </div>
+                    </div>
+                </div>
+                
+                <div class = "col-lg-4">
+                    <div class="chart-wrapper">
+                        <div class= "chart-title chart-center">
+                            <h4>Device Type</h4>
+                        </div>
+                        <div class="chart-stage">
+                            <div id = "source-chart"></div>	
+                        </div>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+    
+    <!-- "Fourth" Row -->
+    <div class = "container-fluid cont-2">
+        <div class = "row">
+            <div class = "col-lg-12">
+                <div class = "col-lg-5">
+                    <div class="chart-wrapper">
+                        <div class="chart-title chart-center">
+                            Distance From Passenger to Driver
+                        </div>
+                        <div class="chart-stage">
+                            <div id="pickupdistance-Chart"></div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class = "col-lg-7">
+                    <div class="chart-title">
+                        Pickup Location
+                    </div>
+                    <div class="chart-stage">
+                        <div id="map2" style="width:100%; height:400px;"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- "Fifth" Row -->
+    <div class = "container-fluid cont-2">
+        <div class = "row">
+            <div class = "col-lg-12">
+                <div class = "col-lg-5">
+                    <div class="chart-wrapper">
+                        <div class="chart-title chart-center">
+                            Distance Travelled
+                        </div>
+                        <div class="chart-stage">
+                            <div id="travel-Chart"></div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class = "col-lg-7">
+                    <div class="chart-title">
+                        Dropoff Location
+                    </div>
+                    <div class="chart-stage">
+                        <div id="map3" style="width:100%; height:400px;"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+	
+        <!-- Modals -->
+		<div class="modal fade bs-example-modal-sm" id="loadingModal" tabindex="-1"
+		    role="dialog" aria-hidden="true" data-backdrop="static">
+		    <div class="vertical-alignment-helper">
+			    <div class="modal-dialog modal-sm vertical-align-center">
+			        <div class="modal-content">
+			            <div class="modal-header">
+			                <h4 class="modal-title">
+			                    <span>Loading data ...</span>
+			                 </h4>
+			            </div>
+			            <div class="modal-body">
+			                <div class="progress">
+			                    <div class="progress-bar progress-bar-info
+			                    progress-bar-striped active"
+			                    style="width: 100%">
+			                    </div>
+			                </div>
+			            </div>
+			        </div>
+			    </div>
+		    </div>
+		</div>
+	<!-- End Modals -->  
+	
+    <script src="./static/lib/js/jquery.min.js"></script>
+    <script src="./static/lib/js/jquery.matchHeight.js"></script>
+    <script src="./static/lib/js/bootstrap.min.js"></script>
+    <script src="./static/lib/js/underscore-min.js"></script>
+    <script src="./static/lib/js/crossfilter.js"></script>
+    <script src="./static/lib/js/d3.min.js"></script>
+    <script src="./static/lib/js/dc.min.js"></script>
+    <script src="./static/lib/js/d3-queue.js"></script>
+    <script src="./static/lib/js/dc.js"></script>
+    <script src="./static/lib/js/dc.js.map.js"></script>
+    <script src="./static/lib/js/leaflet.js"></script>
+    <script src="./static/lib/js/leaflet-heat.js"></script>
+    <!--script src="./static/lib/js/dc.leaflet.js"></script-->
+    <script src="./static/lib/js/dc-leaflet.js"></script>
+    <script src="./static/lib/js/leaflet.markercluster.js"></script>
+    <script src="./static/lib/js/keen.min.js"></script>
+    <script src='./static/js/gtaxi_charts.js'></script>
+</body>
+</html>
