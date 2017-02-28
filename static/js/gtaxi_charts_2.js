@@ -40,9 +40,9 @@ d3.csv("DataSeerGrabPrizeData1.csv", function makeGraphs(error, recordsJson) {
         function reduceAdd(attr) {
             return function(p,v) {
                     ++p.count
-					if(v[attr] != "")
-						++p.count2
-					p.sums += v[attr] ;
+					if(v[attr] != "") {
+						++p.count2;
+						p.sums += v[attr] ;}
 					if (v[attr] < p.min)
 						p.min = v[attr]
 					if (v[attr] > p.max)
@@ -53,9 +53,9 @@ d3.csv("DataSeerGrabPrizeData1.csv", function makeGraphs(error, recordsJson) {
         function reduceRemove(attr) {
             return function(p,v) {
                     --p.count
-					p.sums -= v[attr] ;
-					if(v[attr] != null)
-						--p.count2
+					if(v[attr] != null){
+						p.sums -= v[attr] ;
+						--p.count2;}
                 return p;
             };
         }
