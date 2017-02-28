@@ -40,7 +40,7 @@ d3.csv("DataSeerGrabPrizeData1.csv", function makeGraphs(error, recordsJson) {
         function reduceAdd(attr) {
             return function(p,v) {
                     ++p.count
-					if(v[attr] != null)
+					if(v[attr] != "")
 						++p.count2
 					p.sums += v[attr] ;
 					if (v[attr] < p.min)
