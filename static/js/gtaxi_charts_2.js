@@ -254,7 +254,7 @@ d3.csv("DataSeerGrabPrizeData1.csv", function makeGraphs(error, recordsJson) {
         .group(allGroup)
 
 	timeChart
-        .width(widthsize(window.innerWidth, "others"))
+        .width(widthsize(window.innerWidth, "others2"))
         .height(225)
         .margins({top:30, right: 30, bottom: 20, left: 40})
 		.dimension(dateDim)	
