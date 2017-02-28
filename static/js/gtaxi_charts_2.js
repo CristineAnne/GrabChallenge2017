@@ -3,7 +3,7 @@ $(document).ready(function() {
 	});
 
 
-d3.csv("./blob/master/DataSeerGrabPrizeData1.csv", function makeGraphs(error, recordsJson) {
+d3.csv("https://github.com/CristineAnne/Takuyakis/blob/master/DataSeerGrabPrizeData1.csv", function makeGraphs(error, recordsJson) {
      console.log(error);
     var records = recordsJson;
 	
