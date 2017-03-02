@@ -33,9 +33,7 @@ d3.csv("DataSeerGrabPrizeData1.csv", function makeGraphs(error, recordsJson) {
 		dropofflatlongDim = ndx.dimension(function (d) {return (d.drop_off_latlong);}),
 		pickupDistanceDim = ndx.dimension(function (d) {return (d.pick_up_distance_mod);}),
 		tarvelDistanceDim = ndx.dimension(function (d) {return (d.pickup_dropoff_dist_mod);});		
-//		locationDim = ndx.dimension(function (d) {return d["pick_up_location"]; });
-	
- 
+	 
  // Add and count values of a column
         function reduceAdd(attr) {
             return function(p,v) {
@@ -147,7 +145,6 @@ d3.csv("DataSeerGrabPrizeData1.csv", function makeGraphs(error, recordsJson) {
 		cityGroup = cityDim.group(),
 		stateGroup = stateDim.group(),
 		dayhourGroup = dayhourDim.group().reduce(reduceAdd("fare"),reduceRemove("fare"), reduceInit),
-//		locationGroup = locationDim.group().reduceCount(),
 		pickuplatlongGroup = pickuplatlongDim.group().reduceCount(),
 		dropofflatlongGroup = dropofflatlongDim.group().reduceCount(),
 		pickupDistanceGroup = pickupDistanceDim.group(),
@@ -173,46 +170,45 @@ d3.csv("DataSeerGrabPrizeData1.csv", function makeGraphs(error, recordsJson) {
 
 	fareAveChart
 		.formatNumber(d3.format(".g"))
-        .valueAccessor(function (d) {
-    	    return (d.value.sums/d.value.count2).toFixed(3);
-    	})
+	        .valueAccessor(function (d) {
+    		    return (d.value.sums/d.value.count2).toFixed(3);
+    		})
 		.group(fareGroup);
 
 	sourceChart
-        .width(widthsize(window.innerWidth, "heatmap")/2)
-        .height(window.innerHeight/3 + 50)
-        .margins({top:0, right: 30, bottom: 50, left: 30})
-        .dimension(sourceDim)
-        .group(sourceGroup)
-        .elasticX(true)
+	        .width(widthsize(window.innerWidth, "heatmap")/2)
+        	.height(window.innerHeight/3 + 50)
+	        .margins({top:0, right: 30, bottom: 50, left: 30})
+        	.dimension(sourceDim)
+	        .group(sourceGroup)
+        	.elasticX(true)
 		.colors('#00ba51')
-//        .labelOffsetY(10)
-        .xAxis().ticks(4);
+	        .xAxis().ticks(4);
 
 	cityChart
-        .width(widthsize(window.innerWidth, "heatmap")/2)
-        .height(window.innerHeight/3 + 50)
-        .margins({top:0, right: 30, bottom: 50, left: 30})
-        .dimension(cityDim)
-        .group(cityGroup)
-        .elasticX(true)
+		.width(widthsize(window.innerWidth, "heatmap")/2)
+		.height(window.innerHeight/3 + 50)
+		.margins({top:0, right: 30, bottom: 50, left: 30})
+		.dimension(cityDim)
+		.group(cityGroup)
+		.elasticX(true)
 		.colors('#00ba51')
-        .xAxis().ticks(4);
+        	.xAxis().ticks(4);
 		
 	stateChart
-        .width(widthsize(window.innerWidth, "heatmap")/2 - 40)
-        .height(window.innerHeight/4 + 20)
-        .margins({top:0, right: 0, bottom: 0, left: 0})
-        .dimension(stateDim)
-        .group(stateGroup)
-        .elasticX(true)
+		.width(widthsize(window.innerWidth, "heatmap")/2 - 40)
+		.height(window.innerHeight/4 + 20)
+		.margins({top:0, right: 0, bottom: 0, left: 0})
+		.dimension(stateDim)
+		.group(stateGroup)
+		.elasticX(true)
 		.colors('#00ba51')
-        .xAxis().ticks(4);
+	        .xAxis().ticks(4);
     
 	dayhourChart
 		.width(widthsize(window.innerWidth, "heatmap"))
-        .height(window.innerHeight/2-fudge)
-        .margins({top:20, right: 20, bottom: 30, left: 40})
+		.height(window.innerHeight/2-fudge)
+		.margins({top:20, right: 20, bottom: 30, left: 40})
 		.dimension(dayhourDim)
 		.group(dayhourGroup)
 		.rows(["Sun","Mon","Tues","Wed", "Thurs", "Fri", "Sat"])
@@ -229,38 +225,38 @@ d3.csv("DataSeerGrabPrizeData1.csv", function makeGraphs(error, recordsJson) {
 				   "Average Fare:" + (d.value.sums/d.value.count2);})
 		.colors(["#FFFFE5", "#F7FCB9", "#D9F0A3", "#ADDD8E", "#78C679", "#41AB5D", "#238443", "#006837", "#004529"])
 		.calculateColorDomain();
+	
 	dayhourChart.xBorderRadius(0);
-    dayhourChart.yBorderRadius(0);
+    	dayhourChart.yBorderRadius(0);
 
 	allocationRate
 		.formatNumber(d3.format(".g"))
-        .valueAccessor(function (d) {
-    	    return (d.value.sums/d.value.count).toFixed(3);
-    	})
+        	.valueAccessor(function (d) {
+    	    		return (d.value.sums/d.value.count).toFixed(3);
+    			})
 		.group(allAllocatedGroup);
 
-    actualAllocationRate
+    	actualAllocationRate
 		.formatNumber(d3.format(".g"))
-        .valueAccessor(function(d){
-            return ((d.value.count-d.value.sums)/d.value.count).toFixed(3);
-        })
-        .group(allCompletedGroup)
+	        .valueAccessor(function(d){
+        	    	return ((d.value.count-d.value.sums)/d.value.count).toFixed(3);
+        		})
+        	.group(allCompletedGroup)
 
-    countData
+	countData
 		.formatNumber(d3.format(","))
-        .valueAccessor(function(d){
-            return d;
-        })
-        .group(allGroup)
+        	.valueAccessor(function(d){
+            		return d;
+        		})
+	        .group(allGroup)
 
 	timeChart
-        .width(widthsize(window.innerWidth, "others2"))
-        .height(225)
-        .margins({top:30, right: 30, bottom: 20, left: 40})
+	        .width(widthsize(window.innerWidth, "others2"))
+        	.height(225)
+	        .margins({top:30, right: 30, bottom: 20, left: 40})
 		.dimension(dateDim)	
-        .x(d3.time.scale().domain([minDate, maxDate]))
+        	.x(d3.time.scale().domain([minDate, maxDate]))
 		.colors('#00ba51')
-		//.legend(dc.legend().x(70).y(10).itemHeight(13).gap(5))
 		.transitionDuration(1000)
 		.rangeChart(navTimeChart)
 		.elasticY(true)
@@ -269,22 +265,20 @@ d3.csv("DataSeerGrabPrizeData1.csv", function makeGraphs(error, recordsJson) {
 		.renderHorizontalGridLines(true)
 		.group(recordsByDate);
 	
-    navTimeChart
-        .width(widthsize(window.innerWidth, "others2"))
-        .height(40)
-        .margins({left: 0, top: 0, right: 0, bottom: 20})
+	navTimeChart
+		.width(widthsize(window.innerWidth, "others2"))
+		.height(40)
+		.margins({left: 0, top: 0, right: 0, bottom: 20})
 		.colors('#00ba51')
-        .x(d3.time.scale().domain([minDate, maxDate]))
-        .brushOn(true)
+		.x(d3.time.scale().domain([minDate, maxDate]))
+		.brushOn(true)
 		.elasticY(true)
-	//	.round(d3.time.month.round)
-	//	.xUnits(d3.time.months)
-        .dimension(dateDim)
-        .group(recordsByDate);
+		.dimension(dateDim)
+		.group(recordsByDate);
 
 	classificationChart
 		.width(widthsize(window.innerWidth, "pie"))
-        .height(225)
+        	.height(225)
 		.dimension(classificationDim)
 		.group(classificationGroup)
 		.slicesCap(4)
@@ -350,8 +344,7 @@ d3.csv("DataSeerGrabPrizeData1.csv", function makeGraphs(error, recordsJson) {
         .dimension(pickupDistanceDim)
         .group(pickupDistanceGroup)
         .elasticX(true)
-		.colors('#00ba51')
-//        .labelOffsetY(10)
+	.colors('#00ba51')
         .xAxis().ticks(4);
 
 	travel_distance
@@ -361,7 +354,7 @@ d3.csv("DataSeerGrabPrizeData1.csv", function makeGraphs(error, recordsJson) {
         .dimension(tarvelDistanceDim)
         .group(tarvelDistanceGroup)
         .elasticX(true)
-		.colors('#00ba51')
+	.colors('#00ba51')
         .xAxis().ticks(4);
 
 
@@ -372,7 +365,6 @@ d3.csv("DataSeerGrabPrizeData1.csv", function makeGraphs(error, recordsJson) {
         .height(400)
         .fitOnRender(true)
         .fitOnRedraw(true)
-//        .popupOnHover(true)
         .cluster(true);
 			  
     dropoff_marker
@@ -382,7 +374,6 @@ d3.csv("DataSeerGrabPrizeData1.csv", function makeGraphs(error, recordsJson) {
         .height(400)
         .fitOnRender(true)
         .fitOnRedraw(true)
- //       .popupOnHover(true)
         .cluster(true);
 
 	travel_distance.ordering(function(d) {
@@ -400,29 +391,30 @@ d3.csv("DataSeerGrabPrizeData1.csv", function makeGraphs(error, recordsJson) {
     console.log("End!");
 	
 	
-	window.onresize = function() {
+window.onresize = function() {
 
-		dayhourChart
-            .width(widthsize(window.innerWidth, "heatmap"))
-            .height(window.innerHeight/2-fudge)
-			.redraw();
-		classificationChart
-            .width(widthsize(window.innerWidth, "pie"))
-			.redraw();
-		pickup_distance
+	dayhourChart
+  		.width(widthsize(window.innerWidth, "heatmap"))
+        	.height(window.innerHeight/2-fudge)
+		.redraw();
+	classificationChart
+           	.width(widthsize(window.innerWidth, "pie"))
+		.redraw();
+	pickup_distance
 	        .width(widthsize(window.innerWidth, "heatmap")/3)
-			.redraw();
-		travel_distance
-			.width(widthsize(window.innerWidth, "heatmap")/3)
-			.redraw();
-		charts2 = [cityChart, sourceChart, stateChart]
+		.redraw();
+	travel_distance
+		.width(widthsize(window.innerWidth, "heatmap")/3)
+		.redraw();
+	
+	charts2 = [cityChart, sourceChart, stateChart]
 		for (let re of charts2) {
 		re
 			.width(widthsize(window.innerWidth, "heatmap")*5/12)
 			.redraw();
 		}
 		
-		charts = [timeChart, navTimeChart]
+	charts = [timeChart, navTimeChart]
 		for (let re of charts) {
 		_bbox1 = re.root().node().parentNode.getBoundingClientRect();
 		re.width(_bbox1.width).render();				
