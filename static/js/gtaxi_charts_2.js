@@ -35,10 +35,10 @@ d3.csv("DataSeerGrabPrizeData1.csv", function makeGraphs(error, recordsJson) {
 		tarvelDistanceDim = ndx.dimension(function (d) {return (d.pickup_dropoff_dist_mod);});		
 	 
  // Add and count values of a column
-        function reduceAdd(attr) {
+        function reduceAdd(state, attr) {
             return function(p,v) {
                     ++p.count
-			if(v["state"] != "UNALLOCATED") {
+			if(v[state] != "UNALLOCATED") {
 				++p.count2;
 				p.sums += v[attr];}
 			if (v[attr] < p.min)
@@ -51,9 +51,9 @@ d3.csv("DataSeerGrabPrizeData1.csv", function makeGraphs(error, recordsJson) {
         function reduceRemove(attr) {
             return function(p,v) {
                     --p.count
-			if(v["state"] != "UNALLOCATED") {
+			if(v[state] != "UNALLOCATED") {
 				--p.count2;
-				p.sums -= v[attr];}
+				p.sums = v[attr];}
                 	return p;
             };
         }
@@ -136,7 +136,7 @@ d3.csv("DataSeerGrabPrizeData1.csv", function makeGraphs(error, recordsJson) {
 		allAllocatedGroup = allDim.group().reduce(reduceAddAvg("state", "UNALLOCATED"), reduceRemoveAvg("state", "UNALLOCATED"), reduceInit),
 		allCompletedGroup = allDim.group().reduce(reduceAddAvg("state", "COMPLETED"), reduceRemoveAvg("state", "COMPLETED"), reduceInit),
 		allGroup = ndx.groupAll().reduceCount(),
-		fareGroup = allDim.group().reduce(reduceAdd("fare"), reduceRemove("fare"), reduceInit),	
+		fareGroup = allDim.group().reduce(reduceAdd("state", "fare"), reduceRemove("state", "fare"), reduceInit),	
 		minFare = fareDim.bottom(1)[0]["fare"],
 		maxFare = fareDim.top(1)[0]["fare"],
 		minDate = dateDim.bottom(1)[0]["date"],
@@ -144,7 +144,7 @@ d3.csv("DataSeerGrabPrizeData1.csv", function makeGraphs(error, recordsJson) {
 		sourceGroup = sourceDim.group(),
 		cityGroup = cityDim.group(),
 		stateGroup = stateDim.group(),
-		dayhourGroup = dayhourDim.group().reduce(reduceAdd("fare"),reduceRemove("fare"), reduceInit),
+		dayhourGroup = dayhourDim.group().reduce(reduceAdd("state", "fare"),reduceRemove("state", "fare"), reduceInit),
 		pickuplatlongGroup = pickuplatlongDim.group().reduceCount(),
 		dropofflatlongGroup = dropofflatlongDim.group().reduceCount(),
 		pickupDistanceGroup = pickupDistanceDim.group(),
