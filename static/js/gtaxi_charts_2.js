@@ -40,23 +40,23 @@ d3.csv("DataSeerGrabPrizeData1.csv", function makeGraphs(error, recordsJson) {
         function reduceAdd(attr) {
             return function(p,v) {
                     ++p.count
-					if(v[attr] != 0) {
-						++p.count2;
-						p.sums += v[attr];}
-					if (v[attr] < p.min)
-						p.min = v[attr]
-					if (v[attr] > p.max)
-						p.max = v[attr]
-                return p;
+			if(v["state"] != "UNALLOCATED") {
+				++p.count2;
+				p.sums += v[attr];}
+			if (v[attr] < p.min)
+				p.min = v[attr]
+			if (v[attr] > p.max)
+				p.max = v[attr]
+                	return p;
             };
         }
         function reduceRemove(attr) {
             return function(p,v) {
                     --p.count
-					if(v[attr] != 0) {
-						--p.count2;
-						p.sums -= v[attr];}
-                return p;
+			if(v["state"] != "UNALLOCATED") {
+				--p.count2;
+				p.sums -= v[attr];}
+                	return p;
             };
         }
 
