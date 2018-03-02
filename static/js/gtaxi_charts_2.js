@@ -6,7 +6,7 @@ $(document).ready(function() {
 d3.csv("dataSeer.csv", function makeGraphs(error, recordsJson) {
      console.log(error);
     var records = recordsJson;
-	
+	console.log(recordsJson);
     var dateFormat = d3.time.format("%Y-%m-%d")
 	var fudge = 40;
 	
