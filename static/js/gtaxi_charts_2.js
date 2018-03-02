@@ -3,7 +3,7 @@ $(document).ready(function() {
 	});
 
 
-d3.csv("DataSeerGrabPrizeData2.csv", function makeGraphs(error, recordsJson) {
+d3.csv("dataSeer.csv", function makeGraphs(error, recordsJson) {
      console.log(error);
     var records = recordsJson;
 	
@@ -338,7 +338,7 @@ d3.csv("DataSeerGrabPrizeData2.csv", function makeGraphs(error, recordsJson) {
 	});
 	
 	pickup_distance
-        .width(widthsize(window.innerWidth, "heatmap")*5/8)
+        .width(widthsize(window.innerWidth, "heatmap")*7/8)
         .height(window.innerHeight/2 + 50)
         .margins({top:10, right: 10, bottom: 20, left: 25})
         .dimension(pickupDistanceDim)
@@ -348,7 +348,7 @@ d3.csv("DataSeerGrabPrizeData2.csv", function makeGraphs(error, recordsJson) {
         .xAxis().ticks(4);
 
 	travel_distance
-        .width(widthsize(window.innerWidth, "heatmap")*5/8)
+        .width(widthsize(window.innerWidth, "heatmap")*7/8)
         .height(window.innerHeight/2 + 50)
         .margins({top:10, right: 10, bottom: 20, left: 25})
         .dimension(tarvelDistanceDim)
@@ -361,7 +361,7 @@ d3.csv("DataSeerGrabPrizeData2.csv", function makeGraphs(error, recordsJson) {
 	pickup_marker
         .dimension(pickuplatlongDim)
         .group(pickuplatlongGroup)
-        .width(600)
+        .width(700)
         .height(400)
         .fitOnRender(true)
         .fitOnRedraw(true)
@@ -370,7 +370,7 @@ d3.csv("DataSeerGrabPrizeData2.csv", function makeGraphs(error, recordsJson) {
     dropoff_marker
         .dimension(dropofflatlongDim)
         .group(dropofflatlongGroup)
-        .width(600)
+        .width(700)
         .height(400)
         .fitOnRender(true)
         .fitOnRedraw(true)
