@@ -48,7 +48,7 @@ d3.csv("dataSeer.csv", function makeGraphs(error, recordsJson) {
                 	return p;
             };
         }
-        function reduceRemove(attr) {
+        function reduceRemove(state, attr) {
             return function(p,v) {
                     --p.count
 			if(v[state] != "UNALLOCATED") {
@@ -250,6 +250,17 @@ d3.csv("dataSeer.csv", function makeGraphs(error, recordsJson) {
         		})
 	        .group(allGroup)
 
+	navTimeChart
+		.width(widthsize(window.innerWidth, "others2"))
+		.height(40)
+		.margins({left: 0, top: 0, right: 0, bottom: 20})
+		.colors('#00ba51')
+		.x(d3.time.scale().domain([minDate, maxDate]))
+		.brushOn(true)
+		.elasticY(true)
+		.dimension(dateDim)
+		.group(recordsByDate);
+	
 	timeChart
 	        .width(widthsize(window.innerWidth, "others2"))
         	.height(225)
@@ -265,17 +276,6 @@ d3.csv("dataSeer.csv", function makeGraphs(error, recordsJson) {
 		.renderHorizontalGridLines(true)
 		.group(recordsByDate);
 	
-	navTimeChart
-		.width(widthsize(window.innerWidth, "others2"))
-		.height(40)
-		.margins({left: 0, top: 0, right: 0, bottom: 20})
-		.colors('#00ba51')
-		.x(d3.time.scale().domain([minDate, maxDate]))
-		.brushOn(true)
-		.elasticY(true)
-		.dimension(dateDim)
-		.group(recordsByDate);
-
 	classificationChart
 		.width(widthsize(window.innerWidth, "pie"))
         	.height(225)
