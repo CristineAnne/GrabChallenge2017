@@ -53,7 +53,7 @@ d3.csv("dataSeer.csv", function makeGraphs(error, recordsJson) {
                     --p.count
 			if(v[state] != "UNALLOCATED") {
 				--p.count2;
-				p.sums = v[attr];}
+				p.sums -= v[attr];}
                 	return p;
             };
         }
@@ -150,7 +150,7 @@ d3.csv("dataSeer.csv", function makeGraphs(error, recordsJson) {
 		pickupDistanceGroup = pickupDistanceDim.group(),
 		tarvelDistanceGroup = tarvelDistanceDim.group(),
 		all = ndx.groupAll();
-
+console.log(JSON.stringify(fareGroup))
 //Charts
     var timeChart = dc.lineChart("#time-chart"),
 		allocationRate = dc.numberDisplay("#num-allocation-rate-nd"),
