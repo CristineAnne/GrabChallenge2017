@@ -338,7 +338,7 @@ d3.csv("dataSeer.csv", function makeGraphs(error, recordsJson) {
 	});
 	
 	pickup_distance
-        .width(widthsize(window.innerWidth, "heatmap")*7/8)
+        .width(widthsize(window.innerWidth, "heatmap")*6/8)
         .height(window.innerHeight/2 + 50)
         .margins({top:10, right: 10, bottom: 20, left: 25})
         .dimension(pickupDistanceDim)
@@ -348,7 +348,7 @@ d3.csv("dataSeer.csv", function makeGraphs(error, recordsJson) {
         .xAxis().ticks(4);
 
 	travel_distance
-        .width(widthsize(window.innerWidth, "heatmap")*7/8)
+        .width(widthsize(window.innerWidth, "heatmap")*6/8)
         .height(window.innerHeight/2 + 50)
         .margins({top:10, right: 10, bottom: 20, left: 25})
         .dimension(tarvelDistanceDim)
