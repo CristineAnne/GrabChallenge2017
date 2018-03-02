@@ -171,7 +171,7 @@ d3.csv("dataSeer.csv", function makeGraphs(error, recordsJson) {
 	fareAveChart
 		.formatNumber(d3.format(".g"))
 	        .valueAccessor(function (d) {
-    		    return (d.value.sums).toFixed(3);
+    		    return d.value.sums.toFixed(3);
     		})
 		.group(fareGroup);
 
