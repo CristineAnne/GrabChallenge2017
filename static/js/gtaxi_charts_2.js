@@ -3,7 +3,7 @@ $(document).ready(function() {
 	});
 
 
-d3.csv("DataSeerGrabPrizeData1.csv", function makeGraphs(error, recordsJson) {
+d3.csv("DataSeerGrabPrizeData2.csv", function makeGraphs(error, recordsJson) {
      console.log(error);
     var records = recordsJson;
 	
