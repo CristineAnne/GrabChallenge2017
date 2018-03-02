@@ -14,6 +14,7 @@ d3.csv("dataSeer.csv", function makeGraphs(error, recordsJson) {
         d["date"] = dateFormat.parse(d["date"]);
 		d["puplong"] = +d["puplong"];
 		d["puplat"] = +d["puplat"];
+		d["fare"] = +d["fare"];
     });
 
 
