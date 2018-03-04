@@ -39,7 +39,7 @@ d3.csv("dataSeer.csv", function makeGraphs(error, recordsJson) {
         function reduceAdd(state, attr) {
             return function(p,v) {
                     ++p.count
-			if(v[state] != "UNALLOCATED") {
+			if(v[state] == "COMPLETED") {
 				++p.count2;
 				p.sums += v[attr];}
 			if (v[attr] < p.min)
@@ -52,7 +52,7 @@ d3.csv("dataSeer.csv", function makeGraphs(error, recordsJson) {
         function reduceRemove(state, attr) {
             return function(p,v) {
                     --p.count
-			if(v[state] != "UNALLOCATED") {
+			if(v[state] == "COMPLETED") {
 				--p.count2;
 				p.sums -= v[attr];}
                 	return p;
@@ -172,7 +172,7 @@ console.log(JSON.stringify(fareGroup))
 	fareAveChart
 		.formatNumber(d3.format(".g"))
 	        .valueAccessor(function (d) {
-    		    return d.value.sums;
+    		    return (d.value.sums/d.value.count2).toFixed(3);
     		})
 		.group(fareGroup);
 
@@ -223,7 +223,7 @@ console.log(JSON.stringify(fareGroup))
 			return "Hour:   " + d.key[0] + "\n" +
 				   "Day of the Week:  " + d.key[1] + "\n" +
 				   "Count: " + (d.value.count) + "\n" +
-				   "Average Fare:" + (d.value.sums/d.value.count2);})
+				   "Average Fare:" + (d.value.sums/d.value.count2).toFixed(3);})
 		.colors(["#FFFFE5", "#F7FCB9", "#D9F0A3", "#ADDD8E", "#78C679", "#41AB5D", "#238443", "#006837", "#004529"])
 		.calculateColorDomain();
 	
